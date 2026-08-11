@@ -1,0 +1,9 @@
+/* Los atributos de presentación de SVG (fill, stroke) NO resuelven var().
+   Hay que pintarlos desde CSS. */
+.marca {
+  fill: var(--c-tinta);
+}
+
+.punto {
+  fill: var(--c-acento);
+}

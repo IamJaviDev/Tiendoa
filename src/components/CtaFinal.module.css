@@ -1,0 +1,60 @@
+/* Mobile-first. El 110px del original sale del ratio 1.1 sobre --pad-seccion,
+   que ya escala solo. */
+
+.seccion {
+  background: var(--c-tinta);
+  padding: calc(var(--pad-seccion) * 1.1) var(--pad-lateral);
+  text-align: center;
+  /* Superficie oscura: el anillo de foco va en beige */
+  --c-foco: var(--c-beige);
+}
+
+.interior {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.titulo {
+  font-family: var(--f-display);
+  font-size: var(--t-h2-cta);
+  font-weight: 700;
+  color: var(--c-beige);
+  margin: 0 0 20px;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+.texto {
+  font-size: 17px;
+  color: var(--c-humo);
+  line-height: 1.6;
+  margin: 0 0 36px;
+}
+
+/* Sobre tinta el botón va en acento claro con texto oscuro: es la única
+   combinación que llega a AA para el texto (4.86:1) y además separa el botón
+   del fondo de la sección (4.86:1). Con --c-acento-fuerte el texto pasaría,
+   pero el botón quedaría a 2.08:1 del fondo y casi no se vería. */
+.boton {
+  display: block;
+  width: 100%;
+  background: var(--c-acento-claro);
+  color: var(--c-tinta);
+  padding: 18px 40px;
+  border-radius: var(--radio);
+  font-size: 17px;
+  font-weight: 700;
+  transition: background var(--trans);
+}
+
+.boton:hover,
+.boton:focus-visible {
+  background: var(--c-acento-claro-hover);
+}
+
+@media (min-width: 640px) {
+  .boton {
+    display: inline-block;
+    width: auto;
+  }
+}

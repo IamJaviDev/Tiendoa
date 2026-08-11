@@ -1,0 +1,26 @@
+---
+import s from './Hero.module.css';
+import { HERO, whatsappUrl } from '../data/site';
+
+interface Props {
+  variante?: 'claro' | 'oscuro';
+}
+
+const { variante = 'claro' } = Astro.props;
+---
+
+<section class={s.hero} data-variante={variante} aria-labelledby="hero-titular">
+  <div class={s.interior}>
+    <p class={s.kicker}>{HERO.kicker}</p>
+    <h1 class={s.titular} id="hero-titular">{HERO.titular}</h1>
+    <p class={s.subtitulo}>{HERO.subtitulo}</p>
+    <div class={s.botones}>
+      <a class={s.primario} href={whatsappUrl} target="_blank" rel="noopener">
+        {HERO.ctaPrimario}
+      </a>
+      <a class={s.secundario} href={HERO.ctaSecundarioHref}>
+        {HERO.ctaSecundario}
+      </a>
+    </div>
+  </div>
+</section>

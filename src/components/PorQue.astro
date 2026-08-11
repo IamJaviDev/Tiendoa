@@ -1,0 +1,26 @@
+---
+import s from './PorQue.module.css';
+import { PORQUE, PORQUE_INTRO } from '../data/site';
+---
+
+<section class={s.seccion} id="por-que" aria-labelledby="porque-titulo">
+  <div class={s.interior}>
+    <div class={s.grid}>
+      <div>
+        <p class={s.kicker}>{PORQUE_INTRO.kicker}</p>
+        <h2 class={s.titulo} id="porque-titulo">{PORQUE_INTRO.titulo}</h2>
+      </div>
+
+      <ul class={s.puntos}>
+        {
+          PORQUE.map((texto) => (
+            <li class={s.punto}>
+              <span class={s.vineta} aria-hidden="true" />
+              <span class={s.puntoTexto}>{texto}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

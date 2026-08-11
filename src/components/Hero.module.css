@@ -1,0 +1,145 @@
+/* Mobile-first. El ratio 100/90 del original se mantiene proporcional en
+   todos los tamaños con calc(). */
+
+.hero {
+  background: var(--c-beige);
+  padding: var(--pad-seccion) var(--pad-lateral) calc(var(--pad-seccion) * 0.9);
+}
+
+.interior {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.kicker {
+  font-size: var(--t-kicker);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-acento-fuerte);
+  margin-bottom: 22px;
+}
+
+.titular {
+  font-family: var(--f-display);
+  font-size: var(--t-h1);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--c-tinta);
+  margin: 0 0 26px;
+  text-wrap: pretty;
+}
+
+.subtitulo {
+  font-size: var(--t-hero-sub);
+  line-height: 1.6;
+  color: var(--c-oliva);
+  max-width: 620px;
+  margin: 0 auto 40px;
+}
+
+/* En móvil los botones van apilados y a ancho completo */
+.botones {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.primario,
+.secundario {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 16px 32px;
+  border-radius: var(--radio);
+  font-size: var(--t-cuerpo);
+  transition:
+    background var(--trans),
+    color var(--trans),
+    border-color var(--trans);
+}
+
+.primario {
+  background: var(--c-acento-fuerte);
+  color: var(--c-crema);
+  font-weight: 700;
+}
+
+.primario:hover,
+.primario:focus-visible {
+  background: var(--c-acento-fuerte-hover);
+}
+
+.secundario {
+  border: 1px solid var(--c-tinta);
+  color: var(--c-tinta);
+  font-weight: 600;
+}
+
+.secundario:hover,
+.secundario:focus-visible {
+  background: var(--c-tinta);
+  color: var(--c-beige);
+}
+
+@media (min-width: 640px) {
+  .botones {
+    flex-direction: row;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .primario,
+  .secundario {
+    display: inline-block;
+    width: auto;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Variante oscura. data-variante en la raíz, sin JS.
+   -------------------------------------------------------------------------- */
+
+.hero[data-variante='oscuro'] {
+  background: var(--c-tinta);
+  /* Superficie oscura: el anillo de foco va en beige */
+  --c-foco: var(--c-beige);
+}
+
+.hero[data-variante='oscuro'] .titular {
+  color: var(--c-beige);
+}
+
+.hero[data-variante='oscuro'] .subtitulo {
+  color: var(--c-humo);
+}
+
+.hero[data-variante='oscuro'] .kicker {
+  color: var(--c-acento-claro);
+}
+
+/* Sobre tinta, el botón claro necesita texto oscuro para llegar a AA y para
+   distinguirse del fondo de la sección. */
+.hero[data-variante='oscuro'] .primario {
+  background: var(--c-acento-claro);
+  color: var(--c-tinta);
+}
+
+.hero[data-variante='oscuro'] .primario:hover,
+.hero[data-variante='oscuro'] .primario:focus-visible {
+  background: var(--c-acento-claro-hover);
+}
+
+.hero[data-variante='oscuro'] .secundario {
+  border-color: var(--c-beige);
+  color: var(--c-beige);
+}
+
+.hero[data-variante='oscuro'] .secundario:hover,
+.hero[data-variante='oscuro'] .secundario:focus-visible {
+  background: var(--c-beige);
+  color: var(--c-tinta);
+}

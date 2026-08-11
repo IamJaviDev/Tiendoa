@@ -1,0 +1,26 @@
+---
+interface Props {
+  size?: number;
+}
+
+const { size = 39 } = Astro.props;
+---
+
+<!-- Lupa. El original sacaba el mango fuera de su caja (right:-8px, bottom:-3px);
+     aquí la composición entera se ajusta al viewBox conservando la proporción
+     mango/círculo del original (~0,35). Borde izquierdo de la tinta en x=0. -->
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 39 39"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2.5"
+  stroke-linecap="square"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  focusable="false"
+>
+  <circle cx="16.9" cy="16.9" r="15.65" />
+  <line x1="27.97" y1="27.97" x2="36.39" y2="36.39" />
+</svg>

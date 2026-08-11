@@ -1,0 +1,62 @@
+/* Mobile-first: los placeholders envuelven solos, sin breakpoint. */
+
+.franja {
+  padding: clamp(32px, 6vw, 48px) var(--pad-lateral);
+  border-bottom: 1px solid var(--c-linea);
+}
+
+.interior {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.titulo {
+  text-align: center;
+  font-size: var(--t-kicker);
+  font-weight: 600;
+  color: var(--c-oliva);
+  margin-bottom: 24px;
+}
+
+.lista {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.placeholder {
+  width: 150px;
+  height: 44px;
+  /* No dejar que un placeholder de 150px fuerce scroll a 320px de ancho */
+  max-width: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--c-beige),
+    var(--c-beige) 6px,
+    var(--c-beige-raya) 6px,
+    var(--c-beige-raya) 12px
+  );
+  border-radius: var(--radio);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  font-size: 10px;
+  color: var(--c-oliva);
+}
+
+/* El original llevaba opacity: 0.75 aquí. Retirada: bajaba el contraste
+   efectivo a 3.70:1 sobre crema y no llegaba a AA. Sin ella, 6.67:1. */
+.nota {
+  text-align: center;
+  font-size: 11px;
+  color: var(--c-oliva);
+  margin-top: 14px;
+}
+
+@media (min-width: 640px) {
+  .lista {
+    gap: 20px;
+  }
+}

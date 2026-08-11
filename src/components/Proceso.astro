@@ -1,0 +1,25 @@
+---
+import s from './Proceso.module.css';
+import { PROCESO, PROCESO_INTRO } from '../data/site';
+---
+
+<section class={s.seccion} id="proceso" aria-labelledby="proceso-titulo">
+  <div class={s.interior}>
+    <div class={s.intro}>
+      <p class={s.kicker}>{PROCESO_INTRO.kicker}</p>
+      <h2 class={s.titulo} id="proceso-titulo">{PROCESO_INTRO.titulo}</h2>
+    </div>
+
+    <ol class={s.grid}>
+      {
+        PROCESO.map(({ numero, titulo, descripcion }) => (
+          <li class={s.paso}>
+            <p class={s.numero}>{numero}</p>
+            <h3 class={s.pasoTitulo}>{titulo}</h3>
+            <p class={s.pasoTexto}>{descripcion}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

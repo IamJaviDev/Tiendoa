@@ -1,0 +1,47 @@
+---
+import s from './Servicios.module.css';
+import { SERVICIOS, SERVICIOS_INTRO, type ClaveIcono } from '../data/site';
+
+import IconSeo from './icons/IconSeo.astro';
+import IconAds from './icons/IconAds.astro';
+import IconEmail from './icons/IconEmail.astro';
+import IconCro from './icons/IconCro.astro';
+import IconTienda from './icons/IconTienda.astro';
+import IconContenidos from './icons/IconContenidos.astro';
+
+const ICONOS: Record<ClaveIcono, typeof IconSeo> = {
+  seo: IconSeo,
+  ads: IconAds,
+  email: IconEmail,
+  cro: IconCro,
+  tienda: IconTienda,
+  contenidos: IconContenidos,
+};
+---
+
+<section class={s.seccion} id="servicios" aria-labelledby="servicios-titulo">
+  <div class={s.interior}>
+    <div class={s.intro}>
+      <p class={s.kicker}>{SERVICIOS_INTRO.kicker}</p>
+      <h2 class={s.titulo} id="servicios-titulo">{SERVICIOS_INTRO.titulo}</h2>
+      <p class={s.texto}>{SERVICIOS_INTRO.texto}</p>
+    </div>
+
+    <div class={s.grid}>
+      {
+        SERVICIOS.map(({ icono, titulo, descripcion }) => {
+          const Icono = ICONOS[icono];
+          return (
+            <article class={s.tarjeta}>
+              <div class={s.icono}>
+                <Icono />
+              </div>
+              <h3 class={s.tarjetaTitulo}>{titulo}</h3>
+              <p class={s.tarjetaTexto}>{descripcion}</p>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

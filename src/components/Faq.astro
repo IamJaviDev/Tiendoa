@@ -1,0 +1,24 @@
+---
+import s from './Faq.module.css';
+import { FAQ, FAQ_INTRO } from '../data/site';
+---
+
+<section class={s.seccion} id="faq" aria-labelledby="faq-titulo">
+  <div class={s.interior}>
+    <p class={s.kicker}>{FAQ_INTRO.kicker}</p>
+    <h2 class={s.titulo} id="faq-titulo">{FAQ_INTRO.titulo}</h2>
+
+    <div class={s.lista}>
+      {
+        FAQ.map(({ pregunta, respuesta }) => (
+          /* name compartido = solo una abierta a la vez, sin una línea de JS.
+             En navegadores sin soporte degrada a varias abiertas. */
+          <details class={s.item} name="faq">
+            <summary class={s.pregunta}>{pregunta}</summary>
+            <p class={s.respuesta}>{respuesta}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

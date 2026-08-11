@@ -1,0 +1,36 @@
+/* ==========================================================================
+   Fuentes self-hosted.
+
+   Los .woff2 viven en /public/fonts/ (copiados desde node_modules/@fontsource*)
+   en lugar de importarse desde el paquete: Vite los emitiría con hash bajo
+   /_astro/, y entonces sería imposible escribir el <link rel="preload"> con
+   una ruta estable. Ver README → "Actualizar las fuentes".
+
+   Solo subset latin. Cubre castellano completo (incluidos ¿ ¡ ñ á-ú ü),
+   comillas tipográficas, raya — y el símbolo €.
+   ========================================================================== */
+
+/* Manrope Variable — un solo fichero cubre los pesos 400/500/600/700.
+   unicode-range copiado literal de @fontsource-variable/manrope/wght.css */
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/manrope-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Space Grotesk 700 — solo display (H1, H2, números de Proceso, wordmark).
+   @fontsource no declara unicode-range para esta familia en ninguno de sus
+   subsets, así que aquí tampoco: el navegador cae a la fallback por glifo
+   ausente, que es el mismo resultado neto. */
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/space-grotesk-latin-700-normal.woff2") format("woff2");
+}

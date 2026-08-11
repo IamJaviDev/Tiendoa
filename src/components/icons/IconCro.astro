@@ -1,0 +1,24 @@
+---
+interface Props {
+  size?: number;
+}
+
+const { size = 39 } = Astro.props;
+---
+
+<!-- Gráfico de barras: 3 barras de 8px con 4px de aire (32px en total, no
+     llenan la caja a lo ancho, como en el original). Alineadas a la izquierda
+     con la tinta en x=0 y por la base. Alturas 40 / 70 / 100 % de 34. -->
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 39 39"
+  fill="currentColor"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  focusable="false"
+>
+  <rect x="0" y="25.4" width="8" height="13.6" />
+  <rect x="12" y="15.2" width="8" height="23.8" />
+  <rect x="24" y="5" width="8" height="34" />
+</svg>

@@ -1,0 +1,107 @@
+/* Mobile-first: 1 columna de base, 2 a partir de 640, 3 a partir de 900. */
+
+/* El padding va fuera y el max-width dentro. Ponerlos en el mismo elemento
+   con box-sizing: border-box restaría el padding al ancho de contenido y
+   dejaría la sección 80px más estrecha que Proceso. */
+.seccion {
+  padding: var(--pad-seccion) var(--pad-lateral);
+}
+
+.interior {
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+}
+
+.intro {
+  max-width: 640px;
+  margin: 0 0 40px;
+}
+
+.kicker {
+  font-size: var(--t-kicker);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-acento-fuerte);
+  margin-bottom: 14px;
+}
+
+.titulo {
+  font-family: var(--f-display);
+  font-size: var(--t-h2);
+  font-weight: 700;
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+.texto {
+  font-size: var(--t-cuerpo);
+  color: var(--c-oliva);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Truco de bordes: el gap de 1px deja ver el fondo del contenedor, que hace
+   de línea divisoria. A 1 columna sigue funcionando — quedan 5 líneas
+   horizontales más el borde exterior.
+
+   Requiere que la última fila esté completa: con 6 servicios encaja en 1, 2
+   y 3 columnas. Ver la invariante anotada en site.ts.
+   -------------------------------------------------------------------------- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--c-linea);
+  border: 1px solid var(--c-linea);
+}
+
+.tarjeta {
+  background: var(--c-crema);
+  padding: 28px 24px;
+  /* Sin esto, una palabra larga desborda la columna y provoca scroll
+     horizontal en móvil. */
+  min-width: 0;
+}
+
+/* El margen va en el envoltorio, nunca sobre el <svg> del componente hijo:
+   los estilos del padre no alcanzan a la raíz de un hijo. */
+.icono {
+  margin-bottom: 20px;
+  color: var(--c-tinta);
+  line-height: 0;
+}
+
+.tarjetaTitulo {
+  font-weight: 700;
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.tarjetaTexto {
+  font-size: var(--t-tarjeta);
+  color: var(--c-oliva);
+  line-height: 1.55;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .intro {
+    margin-bottom: 56px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .tarjeta {
+    padding: 36px 32px;
+  }
+}

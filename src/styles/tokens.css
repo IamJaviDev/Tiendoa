@@ -1,0 +1,89 @@
+/* ==========================================================================
+   Tiendoa — design tokens
+   Única fuente de verdad para color, tipografía y ritmo.
+   Regla de oro: ningún color ni fuente hardcodeados en los .module.css.
+   ========================================================================== */
+
+:root {
+  /* ---------- Color ---------------------------------------------------- */
+  --c-crema: #faf8f2; /* fondo base de página */
+  --c-tinta: #1b2a38; /* texto principal y secciones oscuras */
+  --c-beige: #e4dcc8; /* bloques claros, texto sobre oscuro */
+  --c-beige-borde: #cabf9f; /* bordes dentro de bloques beige (FAQ) */
+  --c-oliva: #4a5d4e; /* texto secundario sobre claro */
+  --c-humo: #cfd6dc; /* texto secundario sobre oscuro */
+
+  /* --c-linea comparte HOY valor con --c-beige, y es deliberado: uno es
+     superficie y el otro es borde. Se mantienen separados para que tocar
+     --c-beige no mueva los bordes por efecto colateral (ni al revés). */
+  --c-linea: #e4dcc8; /* bordes sobre fondo crema */
+  --c-beige-raya: #ded4bb; /* raya de los logos placeholder */
+
+  /* ---------- Escala de acento ----------------------------------------- */
+  /* REGLA OBLIGATORIA: si es texto, o el fondo de un elemento interactivo,
+     nunca uses --c-acento a secas — no llega a 4.5:1 contra crema (3.40),
+     beige (2.64) ni tinta (4.05). --c-acento queda SOLO para decoración
+     que no transmite información. Al añadir una sección nueva, elige
+     -fuerte sobre fondo claro y -claro sobre fondo oscuro. */
+  --c-acento: #8e7fb0; /* decorativo: viñetas de 8px, rombo del icono */
+  --c-acento-fuerte: #5f5182; /* texto y fondos de botón sobre crema o beige */
+  --c-acento-claro: #9c8dbe; /* texto sobre tinta: números 01-04, kickers */
+
+  /* Variantes de hover, derivadas de las anteriores: sobre claro se oscurece
+     un 8%, sobre oscuro se aclara un 8%. Viven aquí para que ningún módulo
+     necesite literales de color. */
+  --c-acento-fuerte-hover: color-mix(in srgb, #5f5182 92%, #000);
+  --c-acento-claro-hover: color-mix(in srgb, #9c8dbe 92%, #fff);
+
+  /* Fondo del nav sticky: crema al 92% para que el blur deje ver algo */
+  --c-nav-fondo: color-mix(in srgb, #faf8f2 92%, transparent);
+
+  /* ---------- Foco ------------------------------------------------------ */
+  /* NO usar currentColor para el anillo de foco. Dentro de un botón relleno,
+     currentColor es el color del texto del botón, y con outline-offset el
+     anillo se dibuja FUERA, sobre el fondo de la sección: en los CTAs daba
+     1.00:1 y 1.29:1. Este token se contrasta contra la SUPERFICIE, y las
+     secciones oscuras lo redefinen a --c-beige. */
+  --c-foco: var(--c-tinta);
+
+  /* ---------- Tipografía ----------------------------------------------- */
+  --f-display: "Space Grotesk", sans-serif;
+  --f-texto: "Manrope", sans-serif;
+
+  /* Escala fluida (§4 del brief: sustituye los tamaños fijos del original).
+     Los tres H2 conservan máximos distintos — la jerarquía descendente
+     Servicios > PorQue > FAQ es intencionada. */
+  --t-h1: clamp(34px, 7vw, 58px);
+  --t-h2: clamp(28px, 4.5vw, 38px); /* Servicios, Proceso */
+  --t-h2-porque: clamp(27px, 4.3vw, 36px);
+  --t-h2-faq: clamp(26px, 4vw, 34px);
+  --t-h2-cta: clamp(30px, 5vw, 40px);
+  --t-hero-sub: clamp(17px, 2.2vw, 19px);
+  --t-cuerpo: 16px;
+  --t-tarjeta: 14px;
+  --t-kicker: 13px;
+
+  /* ---------- Radio ----------------------------------------------------- */
+  /* La marca es angulosa. NO redondear más de esto. */
+  --radio: 3px;
+
+  /* ---------- Ritmo vertical y contenedores ----------------------------- */
+  --pad-seccion: clamp(64px, 10vw, 100px);
+  --pad-lateral: clamp(20px, 5vw, 40px);
+  --ancho-max: 1200px;
+
+  /* Altura del nav sticky. La usan el scroll-margin-top de las secciones con
+     ancla y el offset superior del panel móvil. Cambia con el breakpoint
+     porque el botón hamburguesa (44px de área táctil) es más alto que la
+     fila de enlaces de escritorio. Medidas reales en F5. */
+  --nav-altura: 73px;
+
+  /* ---------- Movimiento ------------------------------------------------ */
+  --trans: 150ms ease;
+}
+
+@media (min-width: 900px) {
+  :root {
+    --nav-altura: 80px;
+  }
+}

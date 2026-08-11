@@ -1,0 +1,20 @@
+---
+import s from './Footer.module.css';
+import Logo from './icons/Logo.astro';
+import { EMAIL, FOOTER, SITE } from '../data/site';
+
+const anio = new Date().getFullYear();
+---
+
+<footer class={s.pie}>
+  <div class={s.interior}>
+    <div class={s.marca}>
+      <Logo size={22} decorativo />
+      <span class={s.wordmark}>{SITE.nombre}</span>
+    </div>
+
+    <a class={s.email} href={`mailto:${EMAIL}`}>{EMAIL}</a>
+
+    <p class={s.copyright}>{FOOTER.copyright(anio)}</p>
+  </div>
+</footer>

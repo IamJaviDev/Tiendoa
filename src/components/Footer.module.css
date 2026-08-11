@@ -1,0 +1,58 @@
+﻿/* Mobile-first: los tres bloques apilados y centrados; en fila a partir
+   de 640. */
+
+.pie {
+  padding: clamp(32px, 6vw, 48px) var(--pad-lateral);
+  background: var(--c-crema);
+}
+
+.interior {
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wordmark {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: var(--t-tarjeta);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.email {
+  font-size: var(--t-kicker);
+  color: var(--c-oliva);
+  transition: color var(--trans);
+}
+
+.email:hover,
+.email:focus-visible {
+  color: var(--c-acento-fuerte);
+}
+
+.copyright {
+  font-size: 12px;
+  color: var(--c-oliva);
+  margin: 0;
+}
+
+@media (min-width: 640px) {
+  .interior {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    flex-wrap: wrap;
+  }
+}

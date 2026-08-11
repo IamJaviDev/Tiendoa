@@ -1,0 +1,14 @@
+---
+import s from './CtaFinal.module.css';
+import { CTA_FINAL, whatsappUrl } from '../data/site';
+---
+
+<section class={s.seccion} id="contacto" aria-labelledby="cta-titulo">
+  <div class={s.interior}>
+    <h2 class={s.titulo} id="cta-titulo">{CTA_FINAL.titulo}</h2>
+    <p class={s.texto}>{CTA_FINAL.texto}</p>
+    <a class={s.boton} href={whatsappUrl} target="_blank" rel="noopener">
+      {CTA_FINAL.boton}
+    </a>
+  </div>
+</section>

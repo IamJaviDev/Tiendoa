@@ -1,0 +1,5 @@
+/* Único icono que no hereda currentColor: el rombo es violeta por diseño.
+   No se puede poner fill="var(--c-acento)" como atributo — no resuelve. */
+.rombo {
+  fill: var(--c-acento);
+}

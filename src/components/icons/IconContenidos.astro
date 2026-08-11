@@ -1,0 +1,41 @@
+---
+import s from './IconContenidos.module.css';
+
+interface Props {
+  size?: number;
+}
+
+const { size = 39 } = Astro.props;
+---
+
+<!-- Caja de trazo 2.5 + cuadrado de 12×12 girado 45° sobre el centro.
+     El rombo es el único elemento de la iconografía que no hereda
+     currentColor: se pinta desde el módulo CSS, porque los atributos de
+     presentación de SVG no resuelven var(). -->
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 39 39"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  focusable="false"
+>
+  <rect
+    x="1.25"
+    y="1.25"
+    width="36.5"
+    height="36.5"
+    rx="1.75"
+    stroke="currentColor"
+    stroke-width="2.5"
+  />
+  <rect
+    class={s.rombo}
+    x="-6"
+    y="-6"
+    width="12"
+    height="12"
+    transform="translate(19.5 19.5) rotate(45)"
+  />
+</svg>

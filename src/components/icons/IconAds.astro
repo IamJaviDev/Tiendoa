@@ -1,0 +1,32 @@
+---
+interface Props {
+  size?: number;
+}
+
+const { size = 39 } = Astro.props;
+---
+
+<!-- Play: caja de trazo 2.5 + triángulo relleno de 10×12, desplazado 2px a la
+     derecha del centro como en el original (margin-left: 2px).
+     rx = 1.75 para que el radio EXTERIOR del trazo sea 3, igual que el
+     border-radius: 3px del original. -->
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 39 39"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  focusable="false"
+>
+  <rect
+    x="1.25"
+    y="1.25"
+    width="36.5"
+    height="36.5"
+    rx="1.75"
+    stroke="currentColor"
+    stroke-width="2.5"
+  />
+  <path d="M16 13.5 L26 19.5 L16 25.5 Z" fill="currentColor" />
+</svg>

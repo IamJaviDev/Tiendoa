@@ -1,0 +1,30 @@
+---
+import s from './LogosStrip.module.css';
+import { LOGOS } from '../data/site';
+
+interface Props {
+  mostrar?: boolean;
+}
+
+const { mostrar = true } = Astro.props;
+---
+
+{
+  mostrar && (
+    <section class={s.franja} aria-labelledby="logos-titulo">
+      <div class={s.interior}>
+        <p class={s.titulo} id="logos-titulo">
+          {LOGOS.titulo}
+        </p>
+        <div class={s.lista}>
+          {Array.from({ length: LOGOS.cantidad }).map(() => (
+            <div class={s.placeholder} aria-hidden="true">
+              {LOGOS.etiqueta}
+            </div>
+          ))}
+        </div>
+        <p class={s.nota}>{LOGOS.nota}</p>
+      </div>
+    </section>
+  )
+}
