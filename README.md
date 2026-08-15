@@ -36,15 +36,16 @@ texto no hay que abrir ningún `.astro`.
 
 ## Pendientes
 
-1. **Número de WhatsApp.** `src/data/site.ts` → `WHATSAPP.numero` es
-   `34XXXXXXXXX`. **Los tres CTAs llevan a un enlace roto hasta que se
-   rellene.** Se dejó así a propósito: un CTA visiblemente roto es preferible a
-   uno que parezca funcionar y no funcione.
+1. ~~**Número de WhatsApp.**~~ Hecho: `src/data/site.ts` → `TELEFONO`
+   (`+34 631 729 603`). De ahí salen los tres CTAs de WhatsApp, el enlace
+   `tel:` del footer y el `telephone` del JSON-LD.
 2. **Dominio real.** `astro.config.mjs` usa `https://tiendoa.com` como
    placeholder. De ahí salen el canonical, las URLs de Open Graph, el
    `sitemap-index.xml` y el `robots.txt`.
-3. **Logos de clientes.** `LogosStrip` pinta 5 placeholders rayados
-   (`site.ts` → `LOGOS`). Sustituir por logos reales y quitar la nota.
+3. **Logos de clientes.** La franja está **oculta** de momento:
+   `src/pages/index.astro` → `<LogosStrip mostrar={false} />`. Cuando haya
+   logos reales, sustituir los placeholders (`site.ts` → `LOGOS`), quitar la
+   nota y volver a poner `mostrar` en `true` (o quitar la prop).
 4. **Imagen Open Graph.** `public/og.jpg` es un placeholder generado con la
    marca. El wordmark va en la fuente de sistema, no en Space Grotesk.
 5. **Lighthouse sobre la URL real.** Medido 100/100/100/100 en móvil sobre

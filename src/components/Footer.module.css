@@ -30,6 +30,13 @@
   text-transform: uppercase;
 }
 
+.contacto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
 .email {
   font-size: var(--t-kicker);
   color: var(--c-oliva);
@@ -54,5 +61,10 @@
     align-items: center;
     text-align: left;
     flex-wrap: wrap;
+  }
+
+  .contacto {
+    flex-direction: row;
+    gap: 20px;
   }
 }

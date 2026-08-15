@@ -1,7 +1,7 @@
 ---
 import s from './Footer.module.css';
 import Logo from './icons/Logo.astro';
-import { EMAIL, FOOTER, SITE } from '../data/site';
+import { EMAIL, FOOTER, SITE, telefonoE164, telefonoVisible } from '../data/site';
 
 const anio = new Date().getFullYear();
 ---
@@ -13,7 +13,10 @@ const anio = new Date().getFullYear();
       <span class={s.wordmark}>{SITE.nombre}</span>
     </div>
 
-    <a class={s.email} href={`mailto:${EMAIL}`}>{EMAIL}</a>
+    <div class={s.contacto}>
+      <a class={s.email} href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      <a class={s.email} href={`tel:${telefonoE164}`}>{telefonoVisible}</a>
+    </div>
 
     <p class={s.copyright}>{FOOTER.copyright(anio)}</p>
   </div>

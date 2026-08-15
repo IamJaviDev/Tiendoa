@@ -2,7 +2,7 @@
 import '../styles/fonts.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
-import { SITE, EMAIL, FAQ } from '../data/site';
+import { SITE, EMAIL, FAQ, telefonoE164 } from '../data/site';
 
 interface Props {
   titulo?: string;
@@ -21,6 +21,7 @@ const jsonLdOrganizacion = {
   description: SITE.descripcionOrg,
   url: canonical,
   email: EMAIL,
+  telephone: telefonoE164,
   logo: new URL('/favicon.svg', Astro.site).href,
 };
 

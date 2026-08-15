@@ -10,11 +10,21 @@
    Contacto
    -------------------------------------------------------------------------- */
 
-/* PENDIENTE — Javier rellena el número. Sin "+" ni espacios.
-   Se deja como placeholder evidente a propósito: preferimos un CTA
-   visiblemente roto a uno que parezca funcionar y no funcione. */
+/* Teléfono único de contacto: alimenta el CTA de WhatsApp, el enlace tel:
+   del footer y el JSON-LD. Se guarda en formato E.164 sin "+" (lo que pide
+   wa.me) y se derivan el resto de formatos. */
+export const TELEFONO = {
+  prefijo: '34',
+  nacional: '631729603',
+} as const;
+
+export const telefonoE164 = `+${TELEFONO.prefijo}${TELEFONO.nacional}`;
+
+/* Agrupado 3-3-3, como se lee un móvil español. */
+export const telefonoVisible = `+${TELEFONO.prefijo} ${TELEFONO.nacional.slice(0, 3)} ${TELEFONO.nacional.slice(3, 6)} ${TELEFONO.nacional.slice(6)}`;
+
 export const WHATSAPP = {
-  numero: '34XXXXXXXXX',
+  numero: `${TELEFONO.prefijo}${TELEFONO.nacional}`,
   mensaje: 'Hola, quiero agendar una llamada de 30 min para mi ecommerce.',
 } as const;
 
