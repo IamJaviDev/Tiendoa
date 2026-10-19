@@ -1,0 +1,54 @@
+---
+import s from './CookieNotice.module.css';
+import { AVISO_COOKIES } from '../data/site';
+
+const { etiqueta, texto, boton, enlace, cookie } = AVISO_COOKIES;
+---
+
+{
+  /* Sale en el HTML con hidden: sin JS no aparece, y sin JS tampoco hay
+     nada que avisar. Va al final del <body> para que el skip-link siga
+     siendo lo primero enfocable. Es una región, no un diálogo: no es modal,
+     no bloquea la página y nunca mueve el foco al aparecer. */
+}
+<section
+  class={s.aviso}
+  id="aviso-cookies"
+  aria-label={etiqueta}
+  data-cookie={cookie.nombre}
+  data-max-age={cookie.maxAge}
+  hidden
+>
+  <p class={s.texto}>
+    {texto} <a class={s.enlace} href={enlace.href}>{enlace.texto}</a>
+  </p>
+  <button class={s.boton} type="button">{boton}</button>
+</section>
+
+<script>
+  const aviso = document.getElementById('aviso-cookies');
+  const nombre = aviso?.dataset.cookie;
+  const maxAge = aviso?.dataset.maxAge;
+
+  const yaCerrado = (n: string) =>
+    document.cookie.split('; ').includes(`${n}=1`);
+
+  if (aviso && nombre && maxAge && !yaCerrado(nombre)) {
+    const boton = aviso.querySelector('button');
+
+    aviso.hidden = false;
+
+    boton?.addEventListener('click', () => {
+      // Valor "1" y nada más: solo recuerda que el aviso se ha cerrado.
+      document.cookie = `${nombre}=1; Max-Age=${maxAge}; Path=/; SameSite=Lax; Secure`;
+
+      // Si el foco estaba en el botón, al ocultarlo se perdería en <body>:
+      // se lleva a <main>, sin scroll. En cualquier otro caso no se toca.
+      const teniaFoco = document.activeElement === boton;
+      aviso.hidden = true;
+      if (teniaFoco) {
+        document.getElementById('main')?.focus({ preventScroll: true });
+      }
+    });
+  }
+</script>

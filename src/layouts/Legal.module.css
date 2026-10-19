@@ -122,12 +122,74 @@
 }
 
 .tabla th {
-  width: 38%;
   font-weight: 600;
 }
 
+/* Tablas clave–valor (titular, responsable): columna de etiquetas fija */
+.tabla th[scope='row'] {
+  width: 38%;
+}
+
+/* code solo marca el nombre técnico: hereda la fuente del texto */
+.tabla code {
+  font: inherit;
+}
+
 @media (min-width: 640px) {
-  .tabla th {
+  .tabla th[scope='row'] {
     width: 32%;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Tabla de varias columnas (cookies): por debajo de 640 no caben cuatro
+   columnas, así que cada fila se apila en pares etiqueta–valor. La etiqueta
+   sale de data-etiqueta; la cabecera real queda solo para lectores.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 639px) {
+  .tablaApilada table,
+  .tablaApilada tbody,
+  .tablaApilada tr,
+  .tablaApilada td {
+    display: block;
+  }
+
+  .tablaApilada thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .tablaApilada tr {
+    border: 1px solid var(--c-linea);
+  }
+
+  .tablaApilada td {
+    display: grid;
+    grid-template-columns: 38% 1fr;
+    gap: 14px;
+    border: 0;
+    border-bottom: 1px solid var(--c-linea);
+  }
+
+  .tablaApilada td:last-child {
+    border-bottom: 0;
+  }
+
+  .tablaApilada td::before {
+    content: attr(data-etiqueta);
+    font-weight: 600;
+  }
+}
+
+/* Desde 640 las cuatro columnas caben enteras: sin partir palabras */
+@media (min-width: 640px) {
+  .tablaApilada th,
+  .tablaApilada td {
+    overflow-wrap: normal;
   }
 }

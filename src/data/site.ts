@@ -311,8 +311,33 @@ export interface EnlaceLegal {
   href: string;
 }
 
+const RUTA_POLITICA_COOKIES = '/politica-de-cookies/';
+
 export const LEGALES: readonly EnlaceLegal[] = [
   { texto: 'Aviso legal', href: '/aviso-legal/' },
   { texto: 'Política de privacidad', href: '/politica-de-privacidad/' },
-  { texto: 'Política de cookies', href: '/politica-de-cookies/' },
+  { texto: 'Política de cookies', href: RUTA_POLITICA_COOKIES },
 ];
+
+/* --------------------------------------------------------------------------
+   Aviso de cookies
+
+   Informativo, no de consentimiento: el sitio no instala cookies que lo
+   requieran. La cookie solo recuerda que se ha cerrado el aviso; su nombre
+   y duración están declarados en la tabla de /politica-de-cookies/, así que
+   si cambian aquí hay que cambiarlos también allí.
+   -------------------------------------------------------------------------- */
+
+export const AVISO_COOKIES = {
+  etiqueta: 'Aviso de cookies',
+  texto: 'Esta web solo usa cookies técnicas.',
+  boton: 'Entendido',
+  enlace: { texto: 'Política de cookies', href: RUTA_POLITICA_COOKIES },
+  cookie: {
+    nombre: 'tiendoa_aviso',
+    maxAge: 15724800, // 182 días, en segundos
+    // "Hasta": Brave (180 días) y Safari/ITP (7 días) recortan las cookies
+    // creadas desde JS.
+    duracionVisible: 'Hasta 6 meses',
+  },
+} as const;

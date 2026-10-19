@@ -1,8 +1,9 @@
 # Tiendoa — landing
 
 Landing estática más tres páginas legales. Astro 7, salida estática, CSS
-Modules, sin framework de UI y sin Tailwind. El único JavaScript del cliente es
-el menú móvil.
+Modules, sin framework de UI y sin Tailwind. El JavaScript del cliente son dos
+scripts inline, sin librerías: el menú móvil y el aviso de cookies (~400
+bytes).
 
 ## Rutas
 
@@ -73,18 +74,55 @@ texto no hay que abrir ningún `.astro`.
 
 ## Decisiones que conviene conocer
 
-### No hay banner de cookies — y cuándo deja de ser así
+### Aviso de cookies informativo, no de consentimiento
 
 El sitio no instala ninguna cookie que requiera consentimiento: cero
 peticiones a terceros, fuentes self-hosted, sin analítica ni píxeles, sin
-formularios, y el JS del menú no usa `localStorage`. El art. 22.2 LSSI solo
-exige consentimiento previo para cookies no exentas, así que un banner sería
-decorativo.
+formularios, y ningún script usa `localStorage`. El art. 22.2 LSSI solo exige
+consentimiento previo para cookies no exentas, así que no hay nada que
+aceptar ni rechazar: solo se **informa**.
 
-**Condición:** si se incorpora analítica (GA4, GTM…), un vídeo embebido de
-YouTube/Vimeo, un mapa de Google, un reCAPTCHA o un píxel publicitario, hay
-que implantar **consentimiento previo con bloqueo por defecto** (nada se carga
-hasta que el usuario acepta) y actualizar `/politica-de-cookies/`.
+`src/components/CookieNotice.astro` es un componente propio, sin librería
+(textos en `site.ts` → `AVISO_COOKIES`):
+
+- El marcado sale en el HTML con `hidden`; un script inline lo muestra si no
+  existe la cookie. Sin JS no aparece.
+- Al pulsar "Entendido" crea `tiendoa_aviso=1; Max-Age=15724800; Path=/;
+  SameSite=Lax; Secure` (182 días, valor "1" y nada más) y se oculta. Antes
+  de pulsar no hay ninguna cookie.
+- Es una `<section aria-label>`, no un diálogo: no bloquea la página y nunca
+  mueve el foco. Si el foco estaba en el botón al cerrarlo, pasa a `<main>`.
+- Nombre y duración de la cookie están declarados en la tabla de
+  `/politica-de-cookies/`: si cambian en `site.ts`, cambian allí también.
+
+Los navegadores pueden acortar la vida de las cookies creadas desde
+JavaScript, aunque se pidan 182 días: Brave las limita a 180 días y Safari
+(ITP) a 7, así que en Safari el aviso vuelve a salir tras una semana sin
+visitar el sitio. Chrome y Firefox respetan los 182. No es un fallo del sitio:
+para evitarlo, la cookie tendría que ponerla el servidor con `Set-Cookie`.
+
+### Pasar a consentimiento completo
+
+Para el día que entre analítica (GA4, GTM…), un vídeo embebido de
+YouTube/Vimeo, un mapa de Google, un reCAPTCHA o un píxel publicitario. **Solo
+está documentado; no hay nada de esto implementado.**
+
+1. Sustituir `CookieNotice` por **vanilla-cookieconsent v3** (la misma base
+   que el plugin `rogtagwp` del resto de sitios), empaquetada por Astro, nunca
+   por CDN, y con **Consent Mode 2**. Revisar al integrarla que no robe el
+   foco ni atrape el Tab: la 3.1.0 lo hace por defecto, y su caja lleva
+   `role="dialog"` + `aria-modal="true"`.
+2. Añadir la categoría `analytics` (o la que toque) con `autoClear`, para que
+   al retirar el consentimiento se borren sus cookies.
+3. Añadir el botón de rechazar y el panel de preferencias.
+4. Definir Consent Mode 2 por defecto en `denied` **antes** de cargar GTM o
+   gtag.
+5. Bloquear los scripts con `type="text/plain" data-category="..."` hasta que
+   haya consentimiento.
+6. Añadir un enlace permanente "Configurar cookies" en el footer, para poder
+   retirar el consentimiento.
+7. Actualizar la política de cookies con cada cookie nueva (la tabla de
+   `/politica-de-cookies/`), y quitar o renombrar `tiendoa_aviso`.
 
 ### El violeta de marca cambia en textos y botones
 
@@ -149,6 +187,7 @@ src/
   layouts/Base.astro          <head>, meta, JSON-LD, preloads, skip-link
   layouts/Legal.astro         layout de prosa de las páginas legales
   components/                 un .astro + un .module.css por bloque
+    CookieNotice.astro        aviso de cookies (script inline propio)
     icons/                    SVGs de servicios y logo
   styles/                     tokens.css · fonts.css · global.css
   data/site.ts                todo el contenido, tipado

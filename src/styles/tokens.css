@@ -38,6 +38,10 @@
   /* Fondo del nav sticky: crema al 92% para que el blur deje ver algo */
   --c-nav-fondo: color-mix(in srgb, #faf8f2 92%, transparent);
 
+  /* Sombra del aviso de cookies: tinta al 12%, solo para despegarlo del
+     contenido que pasa por debajo. */
+  --sombra-flotante: 0 4px 16px color-mix(in srgb, #1b2a38 12%, transparent);
+
   /* ---------- Foco ------------------------------------------------------ */
   /* NO usar currentColor para el anillo de foco. Dentro de un botón relleno,
      currentColor es el color del texto del botón, y con outline-offset el

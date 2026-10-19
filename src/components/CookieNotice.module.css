@@ -1,0 +1,96 @@
+/* Mobile-first: barra a ancho completo pegada abajo, con el botón a la
+   derecha del texto. A partir de 640, caja abajo a la derecha con el botón
+   debajo. position: fixed, así que no mueve el layout (CLS 0).
+
+   z-index entre la cabecera (20) y el panel móvil (30): el panel lo tapa
+   y, como el aviso es hermano suyo en el <body>, también lo vuelve inert. */
+
+.aviso {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* Compacto en móvil: a 375×667 el aviso no debe llegar al CTA del hero */
+  padding: 10px 16px;
+  background: var(--c-crema);
+  color: var(--c-tinta);
+  border-top: 1px solid var(--c-linea);
+  box-shadow: var(--sombra-flotante);
+  font-family: var(--f-texto);
+  font-size: var(--t-tarjeta);
+  line-height: 1.5;
+}
+
+/* hidden lo resuelve la hoja del navegador con display: none, pero el
+   display: flex de arriba lo pisaría. */
+.aviso[hidden] {
+  display: none;
+}
+
+.texto {
+  flex: 1;
+  margin: 0;
+}
+
+/* -fuerte sobre crema: --c-acento a secas no llega a AA */
+.enlace {
+  color: var(--c-acento-fuerte);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  transition: color var(--trans);
+}
+
+.enlace:hover {
+  color: var(--c-acento-fuerte-hover);
+}
+
+/* Mismo tratamiento que los CTA sobre fondo claro. 44px de alto: área
+   táctil mínima. */
+.boton {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: 10px 20px;
+  background: var(--c-acento-fuerte);
+  color: var(--c-crema);
+  border-radius: var(--radio);
+  font-size: var(--t-tarjeta);
+  font-weight: 700;
+  transition: background var(--trans);
+}
+
+.boton:hover,
+.boton:focus-visible {
+  background: var(--c-acento-fuerte-hover);
+}
+
+@media (min-width: 640px) {
+  .aviso {
+    right: 24px;
+    bottom: 24px;
+    left: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 380px;
+    padding: 20px;
+    border: 1px solid var(--c-linea);
+    border-radius: var(--radio);
+  }
+}
+
+/* Entrada discreta, solo si el usuario no ha pedido menos movimiento */
+@media (prefers-reduced-motion: no-preference) {
+  .aviso {
+    animation: entrada 200ms ease-out;
+  }
+}
+
+@keyframes entrada {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}

@@ -1,10 +1,14 @@
 ---
 import Legal from '../layouts/Legal.astro';
-import { LEGAL } from '../data/site';
+import s from '../layouts/Legal.module.css';
+import { AVISO_COOKIES, LEGAL } from '../data/site';
 
-/* Texto literal del brief legal (§5.3). No se reescribe sin pedirlo antes.
-   Si un día entra analítica, un embebido, un mapa, un reCAPTCHA o un píxel,
-   esta página cambia y hace falta consentimiento previo: ver README. */
+/* Texto literal del brief legal (§5.3, con el apartado de cookies del brief
+   del aviso). No se reescribe sin pedirlo antes. Si un día entra analítica,
+   un embebido, un mapa, un reCAPTCHA o un píxel, esta página cambia y hace
+   falta consentimiento previo: ver README. */
+const { cookie } = AVISO_COOKIES;
+const COLUMNAS = ['Cookie', 'Titular', 'Finalidad', 'Duración'] as const;
 const NAVEGADORES = [
   {
     nombre: 'Google Chrome',
@@ -43,10 +47,48 @@ const NAVEGADORES = [
     Este sitio web <strong
       >no utiliza cookies de análisis, de publicidad, de personalización ni de
       redes sociales</strong
-    >. No instalamos ninguna cookie que requiera tu consentimiento previo, y por
-    ese motivo no encontrarás un banner solicitándolo.
+    >, y no instala ninguna cookie que requiera tu consentimiento previo.
   </p>
-  <p>En concreto:</p>
+  <p>La única cookie propia que utilizamos es la siguiente:</p>
+  {
+    /* role explícitos: en móvil la tabla se apila con display: block, y
+       algunos navegadores (Safari) le quitan entonces la semántica de tabla. */
+  }
+  <div class:list={[s.tabla, s.tablaApilada]}>
+    <table role="table">
+      <thead role="rowgroup">
+        <tr role="row">
+          {
+            COLUMNAS.map((columna) => (
+              <th role="columnheader" scope="col">
+                {columna}
+              </th>
+            ))
+          }
+        </tr>
+      </thead>
+      <tbody role="rowgroup">
+        <tr role="row">
+          <td role="cell" data-etiqueta={COLUMNAS[0]}>
+            <code>{cookie.nombre}</code>
+          </td>
+          <td role="cell" data-etiqueta={COLUMNAS[1]}>Propia ({LEGAL.web})</td>
+          <td role="cell" data-etiqueta={COLUMNAS[2]}>
+            Recordar que has visto el aviso de cookies, para no volver a
+            mostrártelo en cada visita
+          </td>
+          <td role="cell" data-etiqueta={COLUMNAS[3]}>{cookie.duracionVisible}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Esta cookie se instala solo cuando pulsas "Entendido" en el aviso y no
+    contiene datos que te identifiquen. Al servir únicamente para recordar una
+    preferencia que tú mismo has expresado, está exenta del deber de
+    consentimiento previo conforme al artículo 22.2 de la LSSI-CE.
+  </p>
+  <p>Además:</p>
   <ul>
     <li>No empleamos herramientas de analítica web ni de medición de audiencias.</li>
     <li>No incorporamos píxeles ni etiquetas publicitarias de terceros.</li>

@@ -17,7 +17,7 @@ const { titulo, descripcion, actualizado } = Astro.props;
 
 <Base titulo={`${titulo} — ${SITE.nombre}`} descripcion={descripcion}>
   <Nav />
-  <main id="main" class={s.pagina}>
+  <main id="main" tabindex="-1" class={s.pagina}>
     <article class={s.prosa}>
       <h1 class={s.titulo}>{titulo}</h1>
       <p class={s.fecha}>Última actualización: {actualizado}</p>

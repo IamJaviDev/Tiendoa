@@ -92,6 +92,12 @@ summary {
   outline-offset: 3px;
 }
 
+/* <main> lleva tabindex="-1" para poder recibir el foco por código (el
+   skip-link y el cierre del aviso de cookies). No es un control: sin anillo. */
+main[tabindex='-1']:focus {
+  outline: none;
+}
+
 /* --------------------------------------------------------------------------
    Anclas bajo el nav sticky: sin esto el título de sección queda tapado
    -------------------------------------------------------------------------- */

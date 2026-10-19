@@ -14,6 +14,12 @@ incompleto, **pregunta antes de tocarlo** en vez de corregirlo por tu cuenta.
 
 ## 1. Por qué no hay banner
 
+> **Nota (19/10/2026):** esta sección queda sustituida por
+> `docs/BRIEF-banner-tiendoa.md`. Ahora hay un aviso informativo propio
+> (`CookieNotice.astro`, sin librería) que instala la cookie `tiendoa_aviso`
+> al pulsar "Entendido", y su JS se suma al del menú móvil. El texto de abajo
+> se conserva como registro de la decisión original.
+
 El sitio no instala ninguna cookie que requiera consentimiento:
 
 - Cero peticiones a terceros, cero scripts externos, cero hojas de estilo externas
@@ -352,10 +358,20 @@ sesión iniciada o recopilar información sobre la navegación.
 **Cookies que utiliza este sitio web**
 
 Este sitio web **no utiliza cookies de análisis, de publicidad, de personalización ni de
-redes sociales**. No instalamos ninguna cookie que requiera tu consentimiento previo, y
-por ese motivo no encontrarás un banner solicitándolo.
+redes sociales**, y no instala ninguna cookie que requiera tu consentimiento previo.
 
-En concreto:
+La única cookie propia que utilizamos es la siguiente:
+
+| Cookie | Titular | Finalidad | Duración |
+|---|---|---|---|
+| `tiendoa_aviso` | Propia ({web}) | Recordar que has visto el aviso de cookies, para no volver a mostrártelo en cada visita | Hasta 6 meses |
+
+Esta cookie se instala solo cuando pulsas "Entendido" en el aviso y no contiene datos que
+te identifiquen. Al servir únicamente para recordar una preferencia que tú mismo has
+expresado, está exenta del deber de consentimiento previo conforme al artículo 22.2 de la
+LSSI-CE.
+
+Además:
 
 - No empleamos herramientas de analítica web ni de medición de audiencias.
 - No incorporamos píxeles ni etiquetas publicitarias de terceros.

@@ -2,6 +2,7 @@
 import '../styles/fonts.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
+import CookieNotice from '../components/CookieNotice.astro';
 import { SITE, EMAIL, telefonoE164 } from '../data/site';
 
 interface Props {
@@ -96,5 +97,6 @@ const jsonLdOrganizacion = {
   <body>
     <a class="skip-link" href="#main">Saltar al contenido</a>
     <slot />
+    <CookieNotice />
   </body>
 </html>
