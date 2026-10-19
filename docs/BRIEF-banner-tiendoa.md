@@ -1,5 +1,13 @@
 # Brief — Aviso informativo de cookies (Tiendoa)
 
+> **Nota (19/10/2026): brief sustituido en la implementación.** No se usó
+> vanilla-cookieconsent: el aviso es un componente propio
+> (`src/components/CookieNotice.astro`), la cookie se llama `tiendoa_aviso`
+> (valor `"1"`, 182 días) y el texto se acortó a "Esta web solo usa cookies
+> técnicas." con el enlace a la política dentro. La referencia vigente es el
+> **README** (apartados "Aviso de cookies informativo, no de consentimiento" y
+> "Pasar a consentimiento completo"). Este documento se conserva como registro.
+
 Añadir un **aviso informativo** de cookies. No es un banner de consentimiento: la web
 sigue sin instalar cookies que lo requieran, y el aviso debe decir eso, sin botones de
 "Rechazar" ni panel de preferencias que no harían nada.

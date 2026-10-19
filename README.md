@@ -101,6 +101,14 @@ JavaScript, aunque se pidan 182 días: Brave las limita a 180 días y Safari
 visitar el sitio. Chrome y Firefox respetan los 182. No es un fallo del sitio:
 para evitarlo, la cookie tendría que ponerla el servidor con `Set-Cookie`.
 
+**Bloqueadores de avisos.** Brave (Shields) oculta el aviso en producción: su
+lista de avisos de cookies tiene un filtro para el id `#aviso-cookies`, y
+seguramente también uBlock Origin y AdGuard con sus listas de "annoyances".
+Para esos usuarios el aviso no aparece y el resto de la web funciona igual.
+**Es deliberado: no se cambia el id para saltarse los filtros del usuario**,
+que ha elegido no ver estos avisos. Para probarlo en Brave, desactivar los
+Shields en `tiendoa.com` (en `localhost` no actúan).
+
 ### Pasar a consentimiento completo
 
 Para el día que entre analítica (GA4, GTM…), un vídeo embebido de
