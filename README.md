@@ -1,8 +1,22 @@
 # Tiendoa — landing
 
-Landing estática de una sola página. Astro 7, salida estática, CSS Modules,
-sin framework de UI y sin Tailwind. El único JavaScript del cliente es el menú
-móvil.
+Landing estática más tres páginas legales. Astro 7, salida estática, CSS
+Modules, sin framework de UI y sin Tailwind. El único JavaScript del cliente es
+el menú móvil.
+
+## Rutas
+
+| Ruta | Página |
+|---|---|
+| `/` | Landing |
+| `/aviso-legal/` | Aviso legal |
+| `/politica-de-privacidad/` | Política de privacidad |
+| `/politica-de-cookies/` | Política de cookies |
+
+Las legales se enlazan solo desde el footer (no desde el nav), usan
+`src/layouts/Legal.astro` y entran solas en el sitemap. Los enlaces del nav son
+`/#servicios`, `/#proceso` y `/#faq` — rutas absolutas, para que funcionen
+también desde una página legal.
 
 ## Arrancar
 
@@ -22,7 +36,9 @@ limpio (Astro 5 arrastra 8 avisos *high* sin arreglo en su rama).
 
 | Qué | Dónde |
 |---|---|
-| **Todo el texto visible** | `src/data/site.ts` |
+| **Todo el texto visible** de la landing | `src/data/site.ts` |
+| Datos del titular (legales) | `src/data/site.ts` → `LEGAL` |
+| Texto de las páginas legales | `src/pages/<ruta>.astro` (literal, no se reescribe sin aprobación) |
 | **Colores, tipografía, ritmo** | `src/styles/tokens.css` |
 | Reset y estilos base | `src/styles/global.css` |
 | `@font-face` | `src/styles/fonts.css` |
@@ -39,9 +55,9 @@ texto no hay que abrir ningún `.astro`.
 1. ~~**Número de WhatsApp.**~~ Hecho: `src/data/site.ts` → `TELEFONO`
    (`+34 631 729 603`). De ahí salen los tres CTAs de WhatsApp, el enlace
    `tel:` del footer y el `telephone` del JSON-LD.
-2. **Dominio real.** `astro.config.mjs` usa `https://tiendoa.com` como
-   placeholder. De ahí salen el canonical, las URLs de Open Graph, el
-   `sitemap-index.xml` y el `robots.txt`.
+2. ~~**Dominio real.**~~ Hecho: `https://tiendoa.com`, en producción. Vive
+   solo en `astro.config.mjs`; de ahí salen el canonical, Open Graph, el
+   JSON-LD, el sitemap, el `robots.txt` y `LEGAL.web`.
 3. **Logos de clientes.** La franja está **oculta** de momento:
    `src/pages/index.astro` → `<LogosStrip mostrar={false} />`. Cuando haya
    logos reales, sustituir los placeholders (`site.ts` → `LOGOS`), quitar la
@@ -55,7 +71,20 @@ texto no hay que abrir ningún `.astro`.
    **Latam**". Si el público objetivo es España, hay que cambiarlo. Decisión de
    Javier; no se ha tocado.
 
-## Dos decisiones que conviene conocer
+## Decisiones que conviene conocer
+
+### No hay banner de cookies — y cuándo deja de ser así
+
+El sitio no instala ninguna cookie que requiera consentimiento: cero
+peticiones a terceros, fuentes self-hosted, sin analítica ni píxeles, sin
+formularios, y el JS del menú no usa `localStorage`. El art. 22.2 LSSI solo
+exige consentimiento previo para cookies no exentas, así que un banner sería
+decorativo.
+
+**Condición:** si se incorpora analítica (GA4, GTM…), un vídeo embebido de
+YouTube/Vimeo, un mapa de Google, un reCAPTCHA o un píxel publicitario, hay
+que implantar **consentimiento previo con bloqueo por defecto** (nada se carga
+hasta que el usuario acepta) y actualizar `/politica-de-cookies/`.
 
 ### El violeta de marca cambia en textos y botones
 
@@ -118,12 +147,16 @@ seguirán sirviendo el viejo.
 ```
 src/
   layouts/Base.astro          <head>, meta, JSON-LD, preloads, skip-link
+  layouts/Legal.astro         layout de prosa de las páginas legales
   components/                 un .astro + un .module.css por bloque
     icons/                    SVGs de servicios y logo
   styles/                     tokens.css · fonts.css · global.css
   data/site.ts                todo el contenido, tipado
   pages/
     index.astro               monta los nueve componentes
+    aviso-legal.astro         \
+    politica-de-privacidad.astro  > texto legal literal, sobre Legal.astro
+    politica-de-cookies.astro /
     robots.txt.ts             generado en build para no duplicar el dominio
 public/                       fuentes, favicon, og.jpg, _headers
 docs/                         brief original y referencia visual

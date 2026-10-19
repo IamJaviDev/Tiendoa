@@ -2,14 +2,21 @@
 import '../styles/fonts.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
-import { SITE, EMAIL, FAQ, telefonoE164 } from '../data/site';
+import { SITE, EMAIL, telefonoE164 } from '../data/site';
 
 interface Props {
   titulo?: string;
   descripcion?: string;
+  /* JSON-LD propio de la página (p. ej. el FAQPage de la home). Solo debe
+     describir contenido que esa página muestra. */
+  jsonLd?: readonly Record<string, unknown>[];
 }
 
-const { titulo = SITE.titulo, descripcion = SITE.descripcion } = Astro.props;
+const {
+  titulo = SITE.titulo,
+  descripcion = SITE.descripcion,
+  jsonLd = [],
+} = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImagen = new URL(SITE.ogImagen, Astro.site).href;
@@ -19,21 +26,14 @@ const jsonLdOrganizacion = {
   '@type': 'Organization',
   name: SITE.nombre,
   description: SITE.descripcionOrg,
-  url: canonical,
+  /* La organización es la misma en todas las páginas: su url es la raíz,
+     no la canonical de la página que se está viendo. */
+  url: new URL('/', Astro.site).href,
   email: EMAIL,
   telephone: telefonoE164,
   logo: new URL('/favicon.svg', Astro.site).href,
 };
 
-const jsonLdFaq = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: FAQ.map(({ pregunta, respuesta }) => ({
-    '@type': 'Question',
-    name: pregunta,
-    acceptedAnswer: { '@type': 'Answer', text: respuesta },
-  })),
-};
 ---
 
 <!doctype html>
@@ -83,11 +83,15 @@ const jsonLdFaq = {
       is:inline
       set:html={JSON.stringify(jsonLdOrganizacion)}
     />
-    <script
-      type="application/ld+json"
-      is:inline
-      set:html={JSON.stringify(jsonLdFaq)}
-    />
+    {
+      jsonLd.map((datos) => (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(datos)}
+        />
+      ))
+    }
   </head>
   <body>
     <a class="skip-link" href="#main">Saltar al contenido</a>

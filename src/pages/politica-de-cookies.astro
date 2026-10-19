@@ -1,0 +1,105 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { LEGAL } from '../data/site';
+
+/* Texto literal del brief legal (§5.3). No se reescribe sin pedirlo antes.
+   Si un día entra analítica, un embebido, un mapa, un reCAPTCHA o un píxel,
+   esta página cambia y hace falta consentimiento previo: ver README. */
+const NAVEGADORES = [
+  {
+    nombre: 'Google Chrome',
+    url: 'https://support.google.com/chrome/answer/95647',
+  },
+  {
+    nombre: 'Mozilla Firefox',
+    url: 'https://support.mozilla.org/es/kb/Borrar%20cookies',
+  },
+  {
+    nombre: 'Safari',
+    url: 'https://support.apple.com/es-es/guide/safari/sfri11471/mac',
+  },
+  {
+    nombre: 'Microsoft Edge',
+    url: 'https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09',
+  },
+];
+---
+
+<Legal
+  titulo="Política de cookies"
+  descripcion="Política de cookies de Tiendoa: este sitio no usa cookies de análisis, publicidad ni redes sociales, y no instala ninguna que requiera tu consentimiento."
+  actualizado={LEGAL.actualizado}
+>
+  <h2>Qué son las cookies</h2>
+  <p>
+    Las cookies son pequeños archivos de texto que los sitios web almacenan en
+    el navegador de quien los visita. Permiten, entre otras cosas, recordar
+    preferencias, mantener una sesión iniciada o recopilar información sobre la
+    navegación.
+  </p>
+
+  <h2>Cookies que utiliza este sitio web</h2>
+  <p>
+    Este sitio web <strong
+      >no utiliza cookies de análisis, de publicidad, de personalización ni de
+      redes sociales</strong
+    >. No instalamos ninguna cookie que requiera tu consentimiento previo, y por
+    ese motivo no encontrarás un banner solicitándolo.
+  </p>
+  <p>En concreto:</p>
+  <ul>
+    <li>No empleamos herramientas de analítica web ni de medición de audiencias.</li>
+    <li>No incorporamos píxeles ni etiquetas publicitarias de terceros.</li>
+    <li>
+      No cargamos scripts, tipografías ni contenidos externos desde servidores de
+      terceros.
+    </li>
+    <li>
+      No utilizamos el almacenamiento local del navegador con fines de
+      seguimiento.
+    </li>
+  </ul>
+  <p>
+    El proveedor que aloja y protege este sitio web puede instalar cookies
+    estrictamente técnicas, necesarias para la seguridad y el correcto
+    funcionamiento de la página, como la detección de tráfico automatizado.
+    Conforme al artículo 22.2 de la LSSI-CE, estas cookies están exentas del
+    deber de obtener consentimiento, al ser imprescindibles para la prestación
+    del servicio.
+  </p>
+
+  <h2>Servicios de terceros</h2>
+  <p>
+    Los botones de contacto de este sitio abren una conversación en WhatsApp o
+    una aplicación de correo electrónico. Al hacer clic abandonas este sitio web
+    y accedes a una plataforma de terceros, que aplica sus propias políticas de
+    cookies y de privacidad. Te recomendamos consultarlas.
+  </p>
+
+  <h2>Cómo gestionar las cookies</h2>
+  <p>
+    Aunque este sitio no instale cookies que requieran tu consentimiento, puedes
+    configurar tu navegador para bloquear o eliminar las cookies de cualquier
+    sitio web:
+  </p>
+  <ul>
+    {
+      NAVEGADORES.map(({ nombre, url }) => (
+        <li>
+          {nombre}:{' '}
+          <a href={url} target="_blank" rel="noopener">
+            {url}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2>Actualización de esta política</h2>
+  <p>
+    Si en el futuro incorporamos herramientas de analítica, contenidos embebidos
+    o cualquier otro servicio que instale cookies no exentas, actualizaremos esta
+    política e implantaremos un sistema de consentimiento previo que te
+    permitirá aceptarlas o rechazarlas antes de que se instalen.
+  </p>
+</Legal>

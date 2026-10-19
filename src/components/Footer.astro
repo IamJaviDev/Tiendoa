@@ -1,17 +1,24 @@
 ---
 import s from './Footer.module.css';
 import Logo from './icons/Logo.astro';
-import { EMAIL, FOOTER, SITE, telefonoE164, telefonoVisible } from '../data/site';
+import {
+  EMAIL,
+  FOOTER,
+  LEGALES,
+  SITE,
+  telefonoE164,
+  telefonoVisible,
+} from '../data/site';
 
 const anio = new Date().getFullYear();
 ---
 
 <footer class={s.pie}>
   <div class={s.interior}>
-    <div class={s.marca}>
+    <a class={s.marca} href="/">
       <Logo size={22} decorativo />
       <span class={s.wordmark}>{SITE.nombre}</span>
-    </div>
+    </a>
 
     <div class={s.contacto}>
       <a class={s.email} href={`mailto:${EMAIL}`}>{EMAIL}</a>
@@ -19,5 +26,19 @@ const anio = new Date().getFullYear();
     </div>
 
     <p class={s.copyright}>{FOOTER.copyright(anio)}</p>
+
+    <nav class={s.legales} aria-label="Legal">
+      <ul class={s.listaLegales}>
+        {
+          LEGALES.map(({ texto, href }) => (
+            <li>
+              <a class={s.enlaceLegal} href={href}>
+                {texto}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
   </div>
 </footer>

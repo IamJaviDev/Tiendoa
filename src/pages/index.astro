@@ -9,9 +9,21 @@ import PorQue from '../components/PorQue.astro';
 import Faq from '../components/Faq.astro';
 import CtaFinal from '../components/CtaFinal.astro';
 import Footer from '../components/Footer.astro';
+import { FAQ } from '../data/site';
+
+/* Solo en la home: es la única página que muestra estas preguntas. */
+const jsonLdFaq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ.map(({ pregunta, respuesta }) => ({
+    '@type': 'Question',
+    name: pregunta,
+    acceptedAnswer: { '@type': 'Answer', text: respuesta },
+  })),
+};
 ---
 
-<Base>
+<Base jsonLd={[jsonLdFaq]}>
   <Nav />
   <main id="main">
     <Hero variante="claro" />

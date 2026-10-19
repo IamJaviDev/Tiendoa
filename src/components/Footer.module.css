@@ -1,5 +1,5 @@
-﻿/* Mobile-first: los tres bloques apilados y centrados; en fila a partir
-   de 640. */
+﻿/* Mobile-first: los bloques apilados y centrados; en fila a partir de 640.
+   Los enlaces legales van siempre en una línea propia debajo. */
 
 .pie {
   padding: clamp(32px, 6vw, 48px) var(--pad-lateral);
@@ -54,6 +54,32 @@
   margin: 0;
 }
 
+.legales {
+  width: 100%;
+}
+
+.listaLegales {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Mismo tratamiento que el email, a 14px. El padding vertical da algo más
+   de área táctil a enlaces que en móvil van apilados. */
+.enlaceLegal {
+  display: inline-block;
+  padding-block: 4px;
+  font-size: var(--t-tarjeta);
+  color: var(--c-oliva);
+  transition: color var(--trans);
+}
+
+.enlaceLegal:hover,
+.enlaceLegal:focus-visible {
+  color: var(--c-acento-fuerte);
+}
+
 @media (min-width: 640px) {
   .interior {
     flex-direction: row;
@@ -66,5 +92,16 @@
   .contacto {
     flex-direction: row;
     gap: 20px;
+  }
+
+  /* flex-basis 100% fuerza la línea propia dentro del flex-wrap */
+  .legales {
+    flex-basis: 100%;
+  }
+
+  .listaLegales {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px 24px;
   }
 }

@@ -2,9 +2,10 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// PENDIENTE: dominio real. Placeholder acordado en revisión del plan.
-// Este es el ÚNICO sitio donde se declara el dominio: canonical, Open Graph
-// y sitemap lo derivan de aquí vía Astro.site.
+// Dominio de producción.
+// Este es el ÚNICO sitio donde se declara el dominio: canonical, Open Graph,
+// sitemap y JSON-LD lo derivan vía Astro.site, y los datos legales de
+// site.ts vía import.meta.env.SITE.
 const SITE = 'https://tiendoa.com';
 
 // https://astro.build/config

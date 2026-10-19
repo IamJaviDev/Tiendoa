@@ -31,7 +31,7 @@ export const WHATSAPP = {
 export const whatsappUrl =
   `https://wa.me/${WHATSAPP.numero}?text=${encodeURIComponent(WHATSAPP.mensaje)}`;
 
-export const EMAIL = 'hola@tiendoa.com' as const;
+export const EMAIL = 'hello@tiendoa.com' as const;
 
 /* --------------------------------------------------------------------------
    Metadatos
@@ -52,15 +52,18 @@ export const SITE = {
    Navegación
    -------------------------------------------------------------------------- */
 
+/* Rutas absolutas con ancla, no '#servicios' a secas: el nav sale también
+   en las páginas legales, y allí un ancla relativa apunta a una sección que
+   no existe. Desde la home, '/#x' es la misma ruta y solo hace scroll. */
 export interface EnlaceNav {
   texto: string;
   href: string;
 }
 
 export const NAV: readonly EnlaceNav[] = [
-  { texto: 'Servicios', href: '#servicios' },
-  { texto: 'Proceso', href: '#proceso' },
-  { texto: 'FAQ', href: '#faq' },
+  { texto: 'Servicios', href: '/#servicios' },
+  { texto: 'Proceso', href: '/#proceso' },
+  { texto: 'FAQ', href: '/#faq' },
 ];
 
 export const CTA_NAV = 'Agendar llamada' as const;
@@ -282,3 +285,34 @@ export const FOOTER = {
   copyright: (anio: number) =>
     `© ${anio} Tiendoa. Agencia de marketing digital para ecommerce.`,
 } as const;
+
+/* --------------------------------------------------------------------------
+   Datos legales
+
+   Los leen las tres páginas legales. Teléfono, email y web se reutilizan de
+   sus fuentes únicas: el dominio sigue viviendo solo en astro.config.mjs.
+   -------------------------------------------------------------------------- */
+
+export const LEGAL = {
+  titular: 'Favian Sanchez Cano',
+  nif: '52770498B',
+  nombreComercial: 'Tiendoa',
+  domicilio: 'Avd. Calp 6, 2, 7H, 03502 Benidorm (Alicante), España',
+  telefono: telefonoVisible,
+  email: EMAIL,
+  web: import.meta.env.SITE.replace(/\/$/, ''),
+  actualizado: '19 de octubre de 2026',
+} as const;
+
+/* Con barra final: es la URL canónica que genera el build (format
+   'directory'), y Cloudflare Pages redirige la versión sin barra. */
+export interface EnlaceLegal {
+  texto: string;
+  href: string;
+}
+
+export const LEGALES: readonly EnlaceLegal[] = [
+  { texto: 'Aviso legal', href: '/aviso-legal/' },
+  { texto: 'Política de privacidad', href: '/politica-de-privacidad/' },
+  { texto: 'Política de cookies', href: '/politica-de-cookies/' },
+];

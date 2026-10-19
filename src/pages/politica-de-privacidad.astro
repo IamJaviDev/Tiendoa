@@ -1,0 +1,191 @@
+---
+import Legal from '../layouts/Legal.astro';
+import s from '../layouts/Legal.module.css';
+import { LEGAL } from '../data/site';
+
+/* Texto literal del brief legal (§5.2). No se reescribe sin pedirlo antes. */
+const { titular, nif, domicilio, telefono, email } = LEGAL;
+---
+
+<Legal
+  titulo="Política de privacidad"
+  descripcion="Política de privacidad de Tiendoa: quién es el responsable, qué datos tratamos cuando nos contactas, con qué finalidad y cómo ejercer tus derechos."
+  actualizado={LEGAL.actualizado}
+>
+  <h2>Responsable del tratamiento</h2>
+  <div class={s.tabla}>
+    <table>
+      <tbody>
+        <tr><th scope="row">Responsable</th><td>{titular}</td></tr>
+        <tr><th scope="row">NIF</th><td>{nif}</td></tr>
+        <tr><th scope="row">Domicilio</th><td>{domicilio}</td></tr>
+        <tr><th scope="row">Teléfono</th><td>{telefono}</td></tr>
+        <tr>
+          <th scope="row">Correo electrónico</th>
+          <td><a href={`mailto:${email}`}>{email}</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Qué datos tratamos</h2>
+  <p>
+    Este sitio web no dispone de formularios de contacto, de suscripción ni de
+    registro, y no recoge datos de navegación con fines analíticos, publicitarios
+    ni de elaboración de perfiles.
+  </p>
+  <p>
+    Únicamente tratamos los datos personales que nos facilitas de forma
+    voluntaria cuando te pones en contacto con nosotros, a través de los canales
+    que se ofrecen en este sitio:
+  </p>
+  <ul>
+    <li>
+      <strong>Datos identificativos y de contacto:</strong> nombre, dirección de
+      correo electrónico y número de teléfono.
+    </li>
+    <li>
+      <strong>Contenido de la comunicación:</strong> el mensaje que nos envías y
+      la información sobre tu proyecto o tu negocio que decidas compartir con
+      nosotros.
+    </li>
+  </ul>
+  <p>
+    No tratamos categorías especiales de datos personales. Te pedimos que no nos
+    facilites este tipo de información a través de estos canales.
+  </p>
+
+  <h2>Con qué finalidad</h2>
+  <ul>
+    <li>
+      Atender las consultas, solicitudes de información y peticiones de cita que
+      nos dirijas.
+    </li>
+    <li>
+      Elaborar y remitir propuestas de servicios cuando así nos lo solicites.
+    </li>
+    <li>
+      Gestionar y mantener la relación comercial, en caso de que llegue a
+      formalizarse.
+    </li>
+  </ul>
+  <p>
+    No utilizamos tus datos para enviarte comunicaciones comerciales no
+    solicitadas ni para tomar decisiones automatizadas.
+  </p>
+
+  <h2>Base jurídica</h2>
+  <ul>
+    <li>
+      La <strong>aplicación de medidas precontractuales</strong> adoptadas a tu
+      solicitud, y en su caso la ejecución del contrato (artículo 6.1.b del
+      RGPD), cuando contactas para informarte sobre nuestros servicios o para
+      contratarlos.
+    </li>
+    <li>
+      El <strong>interés legítimo</strong> en atender las consultas que nos
+      diriges y en mantener la correspondencia y poder acreditarla (artículo
+      6.1.f del RGPD).
+    </li>
+  </ul>
+
+  <h2>Cuánto tiempo conservamos tus datos</h2>
+  <p>
+    Conservamos los datos durante el tiempo necesario para atender tu solicitud
+    y, si se inicia una relación comercial, mientras esta se mantenga vigente.
+  </p>
+  <p>
+    Finalizada la relación, los datos se conservan bloqueados durante los plazos
+    de prescripción de las posibles responsabilidades legales, fiscales y
+    contables, transcurridos los cuales se suprimen.
+  </p>
+
+  <h2>Destinatarios de los datos</h2>
+  <p>
+    No cedemos tus datos a terceros, salvo obligación legal. Sí contamos con
+    proveedores que, como encargados del tratamiento, acceden a los datos para
+    prestarnos sus servicios:
+  </p>
+  <ul>
+    <li>
+      <strong>Cloudflare, Inc.</strong> — alojamiento y distribución de este sitio
+      web.
+    </li>
+    <li>
+      <strong>Zoho Corporation</strong> — servicio de correo electrónico
+      corporativo, con tratamiento en centros de datos de la Unión Europea.
+    </li>
+    <li>
+      <strong>WhatsApp Ireland Limited</strong> (grupo Meta) — únicamente si eliges
+      ese canal para contactar con nosotros. En ese caso, la conversación se
+      desarrolla en una plataforma de terceros que aplica sus propias condiciones
+      y su propia política de privacidad, que te recomendamos consultar.
+    </li>
+  </ul>
+
+  <h2>Transferencias internacionales</h2>
+  <p>
+    Alguno de los proveedores indicados tiene su sede fuera del Espacio
+    Económico Europeo. Estas transferencias se amparan en los mecanismos
+    previstos en el Capítulo V del RGPD, en particular en decisiones de
+    adecuación de la Comisión Europea o en cláusulas contractuales tipo, junto
+    con las garantías adicionales que resulten aplicables.
+  </p>
+
+  <h2>Tus derechos</h2>
+  <p>Puedes ejercer en cualquier momento los siguientes derechos:</p>
+  <ul>
+    <li><strong>Acceso:</strong> conocer qué datos tuyos tratamos.</li>
+    <li>
+      <strong>Rectificación:</strong> corregir los datos inexactos o incompletos.
+    </li>
+    <li>
+      <strong>Supresión:</strong> solicitar que eliminemos tus datos cuando ya no
+      sean necesarios.
+    </li>
+    <li><strong>Oposición:</strong> oponerte a determinados tratamientos.</li>
+    <li>
+      <strong>Limitación:</strong> solicitar que suspendamos el tratamiento en los
+      supuestos previstos.
+    </li>
+    <li>
+      <strong>Portabilidad:</strong> recibir tus datos en un formato estructurado
+      y de uso común.
+    </li>
+  </ul>
+  <p>
+    Para ejercerlos, escríbenos a <a href={`mailto:${email}`}>{email}</a> o a {
+      domicilio
+    }, indicando el derecho que deseas ejercer. Podemos solicitarte que
+    acredites tu identidad.
+  </p>
+  <p>
+    Si consideras que no hemos atendido correctamente tu solicitud, puedes
+    presentar una reclamación ante la Agencia Española de Protección de Datos
+    (<a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a
+    >), autoridad de control competente en materia de protección de datos en
+    España.
+  </p>
+
+  <h2>Menores de edad</h2>
+  <p>
+    Este sitio web y los servicios que ofrece se dirigen a profesionales y
+    empresas, y no están destinados a menores de catorce años. No recogemos
+    conscientemente datos de menores de esa edad.
+  </p>
+
+  <h2>Seguridad</h2>
+  <p>
+    Aplicamos las medidas técnicas y organizativas apropiadas para garantizar un
+    nivel de seguridad adecuado al riesgo, incluida la transmisión cifrada de la
+    información a través de este sitio web mediante protocolo HTTPS.
+  </p>
+
+  <h2>Cambios en esta política</h2>
+  <p>
+    Esta política puede actualizarse para adaptarla a novedades legislativas o a
+    cambios en la forma en que prestamos nuestros servicios. La versión vigente
+    es siempre la publicada en esta página, con indicación de su fecha de última
+    actualización.
+  </p>
+</Legal>

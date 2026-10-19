@@ -6,10 +6,10 @@ import { NAV, CTA_NAV, SITE, whatsappUrl } from '../data/site';
 
 <header class={s.cabecera}>
   <div class={s.interior}>
-    <div class={s.marca}>
+    <a class={s.marca} href="/">
       <Logo size={28} decorativo />
       <span class={s.wordmark}>{SITE.nombre}</span>
-    </div>
+    </a>
 
     <nav class={s.menuEscritorio} aria-label="Principal">
       {
@@ -61,10 +61,10 @@ import { NAV, CTA_NAV, SITE, whatsappUrl } from '../data/site';
 }
 <div class={s.panel} id="nav-panel" hidden>
   <div class={s.panelCabecera}>
-    <div class={s.marca}>
+    <a class={s.marca} href="/">
       <Logo size={28} decorativo />
       <span class={s.wordmark}>{SITE.nombre}</span>
-    </div>
+    </a>
     <button
       class={s.cerrar}
       id="nav-cerrar"
@@ -114,11 +114,13 @@ import { NAV, CTA_NAV, SITE, whatsappUrl } from '../data/site';
     // puede desincronizarse de lo que el usuario ve.
     const estaAbierto = () => !panel.hidden;
 
-    // El ciclo del trap empieza en el botón de cerrar. El toggle queda tapado
-    // por el panel, así que no entra: se le llega cerrando.
+    // Enfocables del panel en orden de DOM (logo, cerrar, enlaces, CTA): el
+    // trap envuelve del último al primero y viceversa, así que el orden tiene
+    // que ser el mismo que sigue Tab. Al abrir, el foco va al botón de cerrar
+    // aunque no sea el primero. El toggle queda tapado por el panel, así que
+    // no entra: se le llega cerrando.
     const enfocables = () => [
-      cerrarBtn,
-      ...panel.querySelectorAll<HTMLElement>('a[href]'),
+      ...panel.querySelectorAll<HTMLElement>('a[href], button'),
     ];
 
     // Todo lo que no sea el panel queda fuera de foco y del árbol de
